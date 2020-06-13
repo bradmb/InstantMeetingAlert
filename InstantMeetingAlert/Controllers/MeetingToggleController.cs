@@ -16,6 +16,10 @@ namespace InstantMeetingAlert.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Toggles the meeting status on/off
+        /// </summary>
+        /// <returns>The current meeting status the screen is in</returns>
         [HttpPost]
         public JsonResult Post()
         {

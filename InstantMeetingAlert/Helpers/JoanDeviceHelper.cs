@@ -6,14 +6,18 @@ namespace InstantMeetingAlert.Helpers
 {
     internal static class JoanDeviceHelper
     {
+        /// <summary>
+        /// Forces the Joan screen to reload and navigate to our page for direction
+        /// </summary>
+        /// <param name="configuration">Configuration data</param>
         internal static void RefreshDevice(IConfiguration configuration)
         {
             var joanConfig = configuration.GetSection("JoanServer");
 
-            var joanHost = joanConfig.GetValue<string>("Host");
-            var joanUsername = joanConfig.GetValue<string>("Username");
-            var joanPassword = joanConfig.GetValue<string>("Password");
-            var joanDeviceId = joanConfig.GetValue<string>("DeviceId");
+            var joanHost = joanConfig.GetSection("JOAN_HOST_URL")?.Value ?? joanConfig.GetValue<string>("Host");
+            var joanUsername = joanConfig.GetSection("JOAN_USERNAME")?.Value ?? joanConfig.GetValue<string>("Username");
+            var joanPassword = joanConfig.GetSection("JOAN_PASSWORD")?.Value ?? joanConfig.GetValue<string>("Password");
+            var joanDeviceId = joanConfig.GetSection("JOAN_DEVICE_ID")?.Value ?? joanConfig.GetValue<string>("DeviceId");
 
             var restClient = new RestClient(joanHost);
             restClient.RemoteCertificateValidationCallback += new RemoteCertificateValidationCallback((sender, certificate, chain, policyErrors) => { return true; });
