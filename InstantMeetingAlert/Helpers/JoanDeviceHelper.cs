@@ -14,10 +14,10 @@ namespace InstantMeetingAlert.Helpers
         {
             var joanConfig = configuration.GetSection("JoanServer");
 
-            var joanHost = joanConfig.GetSection("JOAN_HOST_URL")?.Value ?? joanConfig.GetValue<string>("Host");
-            var joanUsername = joanConfig.GetSection("JOAN_USERNAME")?.Value ?? joanConfig.GetValue<string>("Username");
-            var joanPassword = joanConfig.GetSection("JOAN_PASSWORD")?.Value ?? joanConfig.GetValue<string>("Password");
-            var joanDeviceId = joanConfig.GetSection("JOAN_DEVICE_ID")?.Value ?? joanConfig.GetValue<string>("DeviceId");
+            var joanHost = configuration.GetSection("JOAN_HOST_URL")?.Value ?? joanConfig.GetValue<string>("Host");
+            var joanUsername = configuration.GetSection("JOAN_USERNAME")?.Value ?? joanConfig.GetValue<string>("Username");
+            var joanPassword = configuration.GetSection("JOAN_PASSWORD")?.Value ?? joanConfig.GetValue<string>("Password");
+            var joanDeviceId = configuration.GetSection("JOAN_DEVICE_ID")?.Value ?? joanConfig.GetValue<string>("DeviceId");
 
             var restClient = new RestClient(joanHost);
             restClient.RemoteCertificateValidationCallback += new RemoteCertificateValidationCallback((sender, certificate, chain, policyErrors) => { return true; });
