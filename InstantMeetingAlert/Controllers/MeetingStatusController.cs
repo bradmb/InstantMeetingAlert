@@ -19,7 +19,7 @@ namespace InstantMeetingAlert.Controllers
         [HttpPost]
         public JsonResult Post()
         {
-            return new JsonResult(HomeController.IsInMeeting ? 0 : 1);
+            return new JsonResult(HomeController.IsInMeeting ? 1 : 0);
         }
     }
 }
